@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf3b54yd85e12"]
+
+[ext_resource type="Script" path="res://Menu/Multiplayer/multiplayer.gd" id="1_hn5x5"]
+[ext_resource type="Theme" uid="uid://5x24b8u3a5n7" path="res://ui_theme.tres" id="2_jvedw"]
+[ext_resource type="AudioStream" uid="uid://dugymmncnaso1" path="res://addons/kenney_interface_sounds/click_002.wav" id="3_ehndb"]
+[ext_resource type="AudioStream" uid="uid://d0uppwgw6dgjf" path="res://addons/kenney_interface_sounds/glass_002.wav" id="3_rat3a"]
+[ext_resource type="AudioStream" uid="uid://bgrfs4a8ldsg2" path="res://addons/kenney_interface_sounds/tick_001.wav" id="4_tfvtu"]
+[ext_resource type="Texture2D" uid="uid://vga2ln504481" path="res://l5k_placeholder.png" id="6_2b5yu"]
+
+[node name="Multiplayer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 960.0
+offset_bottom = 560.0
+script = ExtResource("1_hn5x5")
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 2
+offset_left = 232.0
+offset_top = 472.0
+offset_right = 314.0
+offset_bottom = 499.0
+theme = ExtResource("2_jvedw")
+text = "Host"
+
+[node name="StartGame" type="Button" parent="."]
+layout_mode = 2
+offset_left = 368.0
+offset_top = 472.0
+offset_right = 450.0
+offset_bottom = 499.0
+disabled = true
+text = "Start level"
+
+[node name="Connect" type="Button" parent="."]
+layout_mode = 2
+offset_left = 96.0
+offset_top = 472.0
+offset_right = 178.0
+offset_bottom = 499.0
+text = "Connect"
+
+[node name="Cancel" type="Button" parent="."]
+layout_mode = 2
+offset_left = 232.0
+offset_top = 512.0
+offset_right = 314.0
+offset_bottom = 539.0
+disabled = true
+text = "Cancel"
+
+[node name="StatusLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 232.0
+offset_top = 416.0
+offset_right = 314.0
+offset_bottom = 453.0
+text = "Status:"
+horizontal_alignment = 2
+
+[node name="Status" type="Label" parent="."]
+layout_mode = 2
+offset_left = 320.0
+offset_top = 416.0
+offset_right = 402.0
+offset_bottom = 450.0
+
+[node name="StateChangedAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rat3a")
+
+[node name="ButtonClickedAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ehndb")
+
+[node name="ButtonFocusAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tfvtu")
+
+[node name="NameLineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+offset_left = 96.0
+offset_top = 304.0
+offset_right = 314.0
+offset_bottom = 335.0
+text = "Ronald"
+placeholder_text = "Name"
+
+[node name="IpAddressLineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+offset_left = 96.0
+offset_top = 352.0
+offset_right = 314.0
+offset_bottom = 383.0
+text = "localhost"
+placeholder_text = "IP address"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 400.0
+offset_right = 142.0
+offset_bottom = 427.0
+text = "Color"
+color = Color(1, 0, 0, 1)
+
+[node name="L5kPlaceholder" type="Sprite2D" parent="."]
+position = Vector2(504, 128)
+texture = ExtResource("6_2b5yu")
+
+[connection signal="button_down" from="Host" to="." method="_on_host_button_down"]
+[connection signal="focus_entered" from="Host" to="." method="_on_host_focus_entered"]
+[connection signal="button_down" from="StartGame" to="." method="_on_send_hello_to_host_button_down"]
+[connection signal="button_down" from="Connect" to="." method="_on_connect_button_down"]
+[connection signal="button_down" from="Cancel" to="." method="_on_cancel_button_down"]

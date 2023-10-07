@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=3 uid="uid://baelahkev0v4i"]
+
+[ext_resource type="Script" path="res://Game/Player.gd" id="1_0o1cj"]
+[ext_resource type="Texture2D" uid="uid://d04w2766dyune" path="res://addons/kenney_toon-characters-1/Male adventurer/Tilesheet/character_maleAdventurer_sheetHD.png" id="3_iuib4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0mqwg"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:velocity_sync")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath(".:player_id")
+properties/2/spawn = true
+properties/2/sync = false
+properties/2/watch = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rcra"]
+atlas = ExtResource("3_iuib4")
+region = Rect2(0, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0joa"]
+atlas = ExtResource("3_iuib4")
+region = Rect2(192, 1024, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyjo7"]
+atlas = ExtResource("3_iuib4")
+region = Rect2(384, 1024, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hn6ix"]
+atlas = ExtResource("3_iuib4")
+region = Rect2(576, 1024, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi40p"]
+atlas = ExtResource("3_iuib4")
+region = Rect2(768, 1024, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlc2o"]
+atlas = ExtResource("3_iuib4")
+region = Rect2(960, 1024, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5kxh"]
+atlas = ExtResource("3_iuib4")
+region = Rect2(1152, 1024, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87i04"]
+atlas = ExtResource("3_iuib4")
+region = Rect2(1344, 1024, 192, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_73cqi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rcra")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0joa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyjo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn6ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fi40p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlc2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5kxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87i04")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8ql2"]
+size = Vector2(69, 40)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vg7cy"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0.109804, 0.109804, 0.109804, 1)
+shadow_size = 8
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_0o1cj")
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0mqwg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_73cqi")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 76)
+shape = SubResource("RectangleShape2D_n8ql2")
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -48.0
+offset_top = -104.0
+offset_right = 48.0
+offset_bottom = -67.0
+text = "Name"
+label_settings = SubResource("LabelSettings_vg7cy")
+horizontal_alignment = 1
