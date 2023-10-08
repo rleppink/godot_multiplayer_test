@@ -120,11 +120,12 @@ position = Vector2(0, 76)
 shape = SubResource("RectangleShape2D_n8ql2")
 
 [node name="NameLabel" type="Label" parent="."]
-offset_left = -48.0
+offset_left = -96.0
 offset_top = -104.0
-offset_right = 50.0
+offset_right = 96.0
 offset_bottom = -67.0
-text = "<NAME>"
+text = "no_name"
 label_settings = SubResource("LabelSettings_vg7cy")
 horizontal_alignment = 1
 vertical_alignment = 1
+text_overrun_behavior = 3

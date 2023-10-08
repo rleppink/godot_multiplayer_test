@@ -10,7 +10,11 @@ const SPEED = 500.0
 
 func _ready():
 	$NameLabel.text = player_name
-	$AnimatedSprite2D.modulate = color
+	$AnimatedSprite2D.modulate = Color(
+		clamp(color.r, 0.2, 0.8),
+		clamp(color.g, 0.2, 0.8),
+		clamp(color.b, 0.2, 0.8),
+		255)
 
 func _process(_delta: float) -> void:
 	z_index = int(round(position.y))

@@ -100,6 +100,7 @@ offset_right = 142.0
 offset_bottom = 427.0
 text = "Color"
 color = Color(1, 0, 0, 1)
+edit_alpha = false
 
 [node name="L5kPlaceholder" type="Sprite2D" parent="."]
 position = Vector2(504, 128)
