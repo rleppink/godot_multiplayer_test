@@ -7,14 +7,14 @@ func _ready() -> void:
 
 func _on_host_button_down():
 	$ButtonClickedAudio.play()
-	LobbyManager.start_hosting(port, $NameLineEdit.text)
+	LobbyManager.start_hosting(port, {"name": $NameLineEdit.text})
 
 func _on_connect_button_down():
 	$ButtonClickedAudio.play()
 	LobbyManager.start_clienting(
 		$IpAddressLineEdit.text,
 		port,
-		$NameLineEdit.text)
+		{"name": $NameLineEdit.text})
 
 func _on_cancel_button_down():
 	$ButtonClickedAudio.play()

@@ -10,7 +10,7 @@ func _process(_delta) -> void:
 
 func _spawn_characters():
 	var i := 1
-	for peer_id in LobbyManager.get_peers().keys():
+	for peer_id in LobbyManager.get_all_peer_ids():
 		_spawn_character(Vector2(i * 300, 300), peer_id)
 		i += 1
 
