@@ -4,10 +4,12 @@ extends CharacterBody2D
 const SPEED = 500.0
 
 @export var player_id: int
+@export var player_name: String
 @export var velocity_sync: Vector2
 
 func _ready():
 	$AnimatedSprite2D.modulate = Color(randf() + 0.5, randf() + 0.5, randf() + 0.5)
+	$NameLabel.text = player_name
 
 func _process(_delta: float) -> void:
 	z_index = int(round(position.y))

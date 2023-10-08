@@ -60,8 +60,15 @@ func is_multiplayering():
 func get_all_peer_ids():
 	return [multiplayer.get_unique_id()] + peers.keys()
 
-func get_peer_config(peer_id):
-	return peers[peer_id]
+func get_peer_config(peer_id: int) -> Dictionary:
+	if multiplayer.get_unique_id() == peer_id:
+		return my_peer_config
+
+	if peers.has(peer_id):
+		return peers[peer_id]
+
+	push_error("Could not find peer config for given peer id")
+	return {}
 
 func load_scene(scene_path):
 	_load_scene.rpc(scene_path)
