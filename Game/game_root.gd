@@ -17,9 +17,12 @@ func _spawn_characters():
 func _spawn_character(spawn_position: Vector2, player_id: int) -> void:
 	var character = preload("res://Game/player.tscn").instantiate()
 	character.position = spawn_position
-	character.player_id = player_id
-	character.player_name = LobbyManager.get_peer_config(player_id)["name"]
 	character.name = "Character_%s" % str(player_id)
+
+	character.player_id = player_id
+	var peer_config = LobbyManager.get_peer_config(player_id)
+	character.player_name = peer_config["name"]
+	character.color = peer_config["color"]
 
 	add_child(character, true)
 

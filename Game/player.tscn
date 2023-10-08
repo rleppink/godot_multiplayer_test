@@ -20,6 +20,10 @@ properties/3/path = NodePath(".:player_name")
 properties/3/spawn = true
 properties/3/sync = false
 properties/3/watch = false
+properties/4/path = NodePath(".:color")
+properties/4/spawn = true
+properties/4/sync = false
+properties/4/watch = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1rcra"]
 atlas = ExtResource("3_iuib4")
@@ -118,8 +122,9 @@ shape = SubResource("RectangleShape2D_n8ql2")
 [node name="NameLabel" type="Label" parent="."]
 offset_left = -48.0
 offset_top = -104.0
-offset_right = 48.0
+offset_right = 50.0
 offset_bottom = -67.0
-text = "Name"
+text = "<NAME>"
 label_settings = SubResource("LabelSettings_vg7cy")
 horizontal_alignment = 1
+vertical_alignment = 1
