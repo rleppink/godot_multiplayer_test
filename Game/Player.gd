@@ -10,7 +10,7 @@ func _ready():
 	$AnimatedSprite2D.modulate = Color(randf() + 0.5, randf() + 0.5, randf() + 0.5)
 
 func _process(_delta: float) -> void:
-	z_index = position.y
+	z_index = int(round(position.y))
 	
 	if velocity_sync:
 		$AnimatedSprite2D.play("walk")
