@@ -28,6 +28,9 @@ func _on_lobby_state_changed(new_state):
 	$Host.disabled = is_multiplayering
 	$Connect.disabled = is_multiplayering
 	$Cancel.disabled = !is_multiplayering
+	$NameLineEdit.editable = !is_multiplayering
+	$IpAddressLineEdit.editable = !is_multiplayering
+	$ColorPickerButton.disabled = is_multiplayering
 	
 	$StartGame.disabled = !is_multiplayering && !multiplayer.is_server()
 
