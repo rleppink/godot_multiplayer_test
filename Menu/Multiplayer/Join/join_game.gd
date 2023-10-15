@@ -3,6 +3,7 @@ extends Control
 
 func _ready():
 	var config_ip_value = ConfigManager.get_value("ip_address")
+
 	if config_ip_value:
 		%IPAddressLineEdit.text = config_ip_value
 		_validate_ip_address(config_ip_value)
@@ -30,3 +31,7 @@ func _validate_ip_address(ip_address: String):
 		%JoinButton.disabled = false
 	else:
 		%JoinButton.disabled = true
+
+
+func _on_join_button_pressed():
+	get_tree().change_scene_to_file("res://Menu/Multiplayer/Join/clienting_game.tscn")

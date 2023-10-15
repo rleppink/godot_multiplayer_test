@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5rts0i6mngll"]
+[gd_scene load_steps=4 format=3 uid="uid://b5rts0i6mngll"]
 
 [ext_resource type="Script" path="res://Menu/Multiplayer/Host/host_game.gd" id="1_qap6e"]
+[ext_resource type="AudioStream" uid="uid://c87ce6doi28xo" path="res://addons/kenney_interface_sounds/maximize_008.wav" id="2_hylam"]
+[ext_resource type="AudioStream" uid="uid://pjksqgk3svd4" path="res://addons/kenney_interface_sounds/minimize_008.wav" id="3_y02ub"]
 
 [node name="HostGame" type="Control"]
 layout_mode = 3
@@ -34,16 +36,19 @@ text = "Hosting"
 unique_name_in_owner = true
 layout_mode = 2
 auto_height = true
+item_count = 1
+item_0/text = "<IP address list>"
 
 [node name="PlayerList" type="ItemList" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 auto_height = true
+item_count = 1
+item_0/text = "<Player list>"
 
 [node name="StartLevel" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-disabled = true
 text = "Start game"
 
 [node name="BackButton" type="Button" parent="VBoxContainer"]
@@ -53,4 +58,13 @@ focus_neighbor_top = NodePath("../StartLevel")
 focus_previous = NodePath("../StartLevel")
 text = "Back"
 
+[node name="PlayerJoinedAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_hylam")
+
+[node name="PlayerLeftAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_y02ub")
+
+[connection signal="pressed" from="VBoxContainer/StartLevel" to="." method="_on_start_level_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

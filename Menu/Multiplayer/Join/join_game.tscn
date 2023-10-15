@@ -69,4 +69,5 @@ focus_previous = NodePath("../JoinButton")
 text = "Back"
 
 [connection signal="text_changed" from="VBoxContainer/IPAddressContainer/IPAddressLineEdit" to="." method="_on_ip_address_line_edit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
