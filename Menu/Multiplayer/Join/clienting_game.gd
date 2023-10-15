@@ -24,5 +24,4 @@ func _on_back_button_pressed():
 func _build_player_list():
 	%PlayerList.clear()
 	for player_config in LobbyManager.get_all_peers().values():
-		print(player_config)
 		%PlayerList.add_item(player_config["player_name"], null, false)
