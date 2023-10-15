@@ -31,7 +31,6 @@ ConfigManager="*res://config_manager.gd"
 gdscript/warnings/unassigned_variable=2
 gdscript/warnings/unassigned_variable_op_assign=2
 gdscript/warnings/function_used_as_property=2
-gdscript/warnings/unsafe_property_access=1
 gdscript/warnings/unsafe_call_argument=1
 
 [display]
