@@ -1,7 +1,9 @@
 extends Node
 
 signal state_changed(new_state: State)
-signal player_joined(player_id: int, player_config: Dictionary)
+
+signal player_joined(player_id: int)
+signal player_left(player_id: int)
 
 enum State { Uninitialized, CreatingHost, Hosting, Connecting, Clienting }
 
@@ -14,6 +16,8 @@ var peers := {}
 
 var my_peer_config := {}
 
+const PORT := 55443
+
 
 func _ready() -> void:
 	# Server events
@@ -25,41 +29,53 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
-func start_hosting(port: int, peer_config: Dictionary) -> Error:
+
+func start_hosting() -> Error:
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(port)
+	var error = peer.create_server(PORT)
 	state = State.CreatingHost
 	if error:
 		push_error("Could not host server")
 		return FAILED
 
 	multiplayer.multiplayer_peer = peer
-	my_peer_config = peer_config
+	my_peer_config = _create_config()
 	state = State.Hosting
 	return OK
 
-func start_clienting(ip: String, port: int, peer_config: Dictionary) -> Error:
+
+func start_clienting(ip: String) -> Error:
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(ip, port)
+	var error = peer.create_client(ip, PORT)
 	state = State.Connecting
 	if error:
 		push_error("Could not create client")
 		return FAILED
 
 	multiplayer.multiplayer_peer = peer
-	my_peer_config = peer_config
+	my_peer_config = _create_config()
 	return OK
+
 
 func stop_multiplayering():
 	multiplayer.multiplayer_peer = null
 	state = State.Uninitialized
 	peers = {}
 	
+
 func is_multiplayering():
 	return state != State.Uninitialized
 
+
 func get_all_peer_ids():
 	return [multiplayer.get_unique_id()] + peers.keys()
+
+
+func get_all_peers():
+	var dup := peers.duplicate(true)
+	dup[multiplayer.get_unique_id()] = my_peer_config
+	return dup
+
 
 func get_peer_config(peer_id: int) -> Dictionary:
 	if multiplayer.get_unique_id() == peer_id:
@@ -71,36 +87,55 @@ func get_peer_config(peer_id: int) -> Dictionary:
 	push_error("Could not find peer config for given peer id")
 	return {}
 
+
 func load_scene(scene_path):
 	_load_scene.rpc(scene_path)
+
 
 @rpc("authority", "call_local", "reliable")
 func _load_scene(scene_path):
 	get_tree().change_scene_to_file(scene_path)
 
+
 func send_my_peer_config(peer_id):
 	_send_my_peer_confg.rpc_id(peer_id, my_peer_config)
+
 
 @rpc("any_peer", "reliable")
 func _send_my_peer_confg(remote_peer_config):
 	peers[multiplayer.get_remote_sender_id()] = remote_peer_config
-	player_joined.emit(multiplayer.get_remote_sender_id(), remote_peer_config)
+	player_joined.emit(multiplayer.get_remote_sender_id())
 	
+
 func _on_peer_connected(id):
 	send_my_peer_config(id)
+
 
 func _on_peer_disconnected(id):
 	if peers.has(id):
 		peers.erase(id)
 
+	player_left.emit(id)
+
+
 func _on_connected_to_server():
 	state = State.Clienting
+
 
 func _on_connection_failed():
 	stop_multiplayering()
 
+
 func _on_server_disconnected():
 	stop_multiplayering()
+
+
+func _create_config():
+	return {
+		"player_name": ConfigManager.get_value("player_name"),
+		"player_color": ConfigManager.get_value("player_color")
+	}
+
 
 func _print_mp(val):
 	if !multiplayer.multiplayer_peer:
