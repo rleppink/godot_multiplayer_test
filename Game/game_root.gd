@@ -28,14 +28,25 @@ func _spawn_character(spawn_position: Vector2, player_id: int) -> void:
 
 func move():
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+
+	if not multiplayer.is_server():
+		var player_character = _find_player_character(multiplayer.get_unique_id())
+		if player_character:
+			player_character.move(direction)
+
 	_request_move.rpc(direction)
 
 @rpc("any_peer", "call_local")
 func _request_move(direction: Vector2):
 	if not multiplayer.is_server():
 		return
+
+	var player_character = _find_player_character(
+		multiplayer.get_remote_sender_id())
 	
-	var player_id := multiplayer.get_remote_sender_id()
+	player_character.move(direction)
+
+func _find_player_character(player_id):
 	var player_character : CharacterBody2D
 	for node in get_children():
 		if not node is CharacterBody2D:
@@ -48,5 +59,7 @@ func _request_move(direction: Vector2):
 	
 	if not player_character:
 		push_error("Tried to move character that doesn't exist")
-	
-	player_character.move(direction)
+		return null
+
+	return player_character
+
