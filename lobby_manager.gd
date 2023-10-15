@@ -1,6 +1,7 @@
 extends Node
 
 signal state_changed(new_state: State)
+signal player_joined(player_id: int, player_config: Dictionary)
 
 enum State { Uninitialized, CreatingHost, Hosting, Connecting, Clienting }
 
@@ -83,6 +84,7 @@ func send_my_peer_config(peer_id):
 @rpc("any_peer", "reliable")
 func _send_my_peer_confg(remote_peer_config):
 	peers[multiplayer.get_remote_sender_id()] = remote_peer_config
+	player_joined.emit(multiplayer.get_remote_sender_id(), remote_peer_config)
 	
 func _on_peer_connected(id):
 	send_my_peer_config(id)

@@ -21,7 +21,7 @@ config/icon="res://l5k_icon.png"
 
 [autoload]
 
-LobbyManager="*res://Menu/Multiplayer/lobby_manager.tscn"
+LobbyManager="*res://lobby_manager.gd"
 
 [display]
 
