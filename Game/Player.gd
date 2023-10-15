@@ -11,9 +11,9 @@ const SPEED = 500.0
 func _ready():
 	$NameLabel.text = player_name
 	$AnimatedSprite2D.modulate = Color(
-		1 + clamp(color.r, 0.0, 0.5),
-		1 + clamp(color.g, 0.0, 0.5),
-		1 + clamp(color.b, 0.0, 0.5),
+		0.8 + clamp(color.r, 0.0, 0.5),
+		0.8 + clamp(color.g, 0.0, 0.5),
+		0.8 + clamp(color.b, 0.0, 0.5),
 		255)
 
 func _process(_delta: float) -> void:
