@@ -85,7 +85,6 @@ focus_next = NodePath("../HostButton")
 focus_previous = NodePath("../JoinButton")
 text = "Back"
 
-[connection signal="color_changed" from="VBoxContainer/VBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="sanitized_name_changed" from="VBoxContainer/NameBoxContainer/PlayerNameLineEdit" to="." method="_on_sanitized_name_changed"]
 [connection signal="text_changed" from="VBoxContainer/NameBoxContainer/PlayerNameLineEdit" to="VBoxContainer/NameBoxContainer/PlayerNameLineEdit" method="_on_text_changed"]
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
