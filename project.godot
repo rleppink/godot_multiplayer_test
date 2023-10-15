@@ -36,9 +36,6 @@ gdscript/warnings/unsafe_call_argument=1
 
 [display]
 
-window/size/viewport_width=1024
-window/size/viewport_height=768
-window/size/resizable=false
 window/dpi/allow_hidpi=false
 window/vsync/vsync_mode=0
 
