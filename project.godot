@@ -12,6 +12,8 @@ config_version=5
 
 config/name="Multiplayer test"
 run/main_scene="res://Menu/Main/main.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="L5k Games/Multiplayer test"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0.968627, 0.866667, 0.329412, 1)
 boot_splash/show_image=false
@@ -22,6 +24,7 @@ config/icon="res://l5k_icon.png"
 [autoload]
 
 LobbyManager="*res://lobby_manager.gd"
+ConfigManager="*res://config_manager.gd"
 
 [display]
 
