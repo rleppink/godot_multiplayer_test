@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctclvkl6myaa1"]
+
+[ext_resource type="Script" path="res://Menu/Multiplayer/Join/clienting_game.gd" id="1_cfo6k"]
+[ext_resource type="AudioStream" uid="uid://c87ce6doi28xo" path="res://addons/kenney_interface_sounds/maximize_008.wav" id="2_h5xue"]
+[ext_resource type="AudioStream" uid="uid://pjksqgk3svd4" path="res://addons/kenney_interface_sounds/minimize_008.wav" id="3_o0ty3"]
+
+[node name="ClientingGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cfo6k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -29.0
+offset_right = 82.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+
+[node name="Hosting" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Clienting"
+
+[node name="PlayerList" type="ItemList" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+auto_height = true
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
+
+[node name="PlayerJoinedAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_h5xue")
+
+[node name="PlayerLeftAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_o0ty3")
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
