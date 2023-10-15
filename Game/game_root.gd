@@ -27,7 +27,7 @@ func _spawn_character(spawn_position: Vector2, player_id: int) -> void:
 	character.player_name = peer_config["player_name"]
 	character.color = peer_config["player_color"]
 
-	add_child(character, true)
+	$PlayerSpawner.add_child(character, true)
 
 
 func move():
@@ -54,7 +54,7 @@ func _request_move(direction: Vector2):
 
 func _find_player_character(player_id):
 	var player_character : CharacterBody2D
-	for node in get_children():
+	for node in $PlayerSpawner.get_children():
 		if not node is CharacterBody2D:
 			continue
 		
