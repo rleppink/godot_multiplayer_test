@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://5x24b8u3a5n7"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://5x24b8u3a5n7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrkh4"]
 bg_color = Color(0.752941, 0.752941, 0.752941, 1)
@@ -11,6 +11,20 @@ corner_radius_top_left = 1
 corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpfe5"]
+bg_color = Color(1, 0.937255, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 20.0
+expand_margin_right = 20.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ob8px"]
 bg_color = Color(1, 1, 1, 1)
@@ -35,8 +49,18 @@ corner_radius_top_left = 1
 corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxya7"]
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2o1ey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5lt3b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srcgm"]
 bg_color = Color(1, 1, 1, 1)
@@ -48,14 +72,20 @@ expand_margin_right = 4.0
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_disabled_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/styles/disabled = SubResource("StyleBoxFlat_jrkh4")
+Button/styles/focus = SubResource("StyleBoxFlat_dpfe5")
+Button/styles/hover = SubResource("StyleBoxFlat_dpfe5")
 Button/styles/normal = SubResource("StyleBoxFlat_ob8px")
 Button/styles/pressed = SubResource("StyleBoxFlat_arxbf")
+ColorPickerButton/styles/hover = SubResource("StyleBoxFlat_yxya7")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 2
-Label/font_sizes/font_size = 24
+Label/constants/outline_size = 8
+Label/font_sizes/font_size = 16
 Label/styles/normal = SubResource("StyleBoxTexture_2o1ey")
 LineEdit/colors/font_color = Color(0, 0, 0, 1)
 LineEdit/colors/font_placeholder_color = Color(0, 0, 0, 0.737255)
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_5lt3b")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_srcgm")
