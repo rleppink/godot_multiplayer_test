@@ -18,6 +18,7 @@ func _on_player_left(_player_id: int):
 
 
 func _on_back_button_pressed():
+	LobbyManager.stop_multiplayering()
 	get_tree().change_scene_to_file("res://Menu/Multiplayer/host_or_join.tscn")
 
 
