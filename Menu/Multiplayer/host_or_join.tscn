@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dxrmrorqw33fh"]
 
 [ext_resource type="Script" path="res://Menu/Multiplayer/host_or_join.gd" id="1_x6f41"]
-[ext_resource type="Script" path="res://Menu/Multiplayer/NameLineEdit.gd" id="2_6368b"]
+[ext_resource type="Script" path="res://Menu/Multiplayer/player_name_line_edit.gd" id="2_6cm2p"]
 [ext_resource type="Theme" uid="uid://5x24b8u3a5n7" path="res://ui_theme.tres" id="3_fj6mf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynf1f"]
@@ -40,7 +40,7 @@ theme_override_constants/separation = -1
 layout_mode = 2
 text = "Name"
 
-[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer/NameBoxContainer"]
+[node name="PlayerNameLineEdit" type="LineEdit" parent="VBoxContainer/NameBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 max_length = 20
@@ -85,9 +85,9 @@ focus_next = NodePath("../HostButton")
 focus_previous = NodePath("../JoinButton")
 text = "Back"
 
-[connection signal="sanitized_name_changed" from="VBoxContainer/NameBoxContainer/NameLineEdit" to="." method="_on_sanitized_name_changed"]
-[connection signal="text_changed" from="VBoxContainer/NameBoxContainer/NameLineEdit" to="VBoxContainer/NameBoxContainer/NameLineEdit" method="_on_text_changed"]
 [connection signal="color_changed" from="VBoxContainer/VBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="sanitized_name_changed" from="VBoxContainer/NameBoxContainer/PlayerNameLineEdit" to="." method="_on_sanitized_name_changed"]
+[connection signal="text_changed" from="VBoxContainer/NameBoxContainer/PlayerNameLineEdit" to="VBoxContainer/NameBoxContainer/PlayerNameLineEdit" method="_on_text_changed"]
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
