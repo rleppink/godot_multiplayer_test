@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxrmrorqw33fh"]
+
+[ext_resource type="Script" path="res://Menu/Multiplayer/host_or_join.gd" id="1_x6f41"]
+[ext_resource type="Script" path="res://Menu/Multiplayer/NameLineEdit.gd" id="2_6368b"]
+[ext_resource type="Theme" uid="uid://5x24b8u3a5n7" path="res://ui_theme.tres" id="3_fj6mf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynf1f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x8d7e"]
+
+[node name="HostOrJoin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x6f41")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -29.0
+offset_right = 82.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+
+[node name="NameBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/NameBoxContainer"]
+layout_mode = 2
+text = "Name"
+
+[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer/NameBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_length = 20
+clear_button_enabled = true
+script = ExtResource("2_6368b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Color" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ynf1f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x8d7e")
+text = "Color"
+color = Color(1, 0, 0, 1)
+edit_alpha = false
+
+[node name="HostButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_fj6mf")
+disabled = true
+text = "Host a game"
+
+[node name="JoinButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Join a game"
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../JoinButton")
+focus_next = NodePath("../HostButton")
+focus_previous = NodePath("../JoinButton")
+text = "Back"
+
+[connection signal="sanitized_name_changed" from="VBoxContainer/NameBoxContainer/NameLineEdit" to="." method="_on_sanitized_name_changed"]
+[connection signal="text_changed" from="VBoxContainer/NameBoxContainer/NameLineEdit" to="VBoxContainer/NameBoxContainer/NameLineEdit" method="_on_text_changed"]
+[connection signal="color_changed" from="VBoxContainer/VBoxContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

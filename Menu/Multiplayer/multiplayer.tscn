@@ -1,113 +1,169 @@
-[gd_scene load_steps=7 format=3 uid="uid://cf3b54yd85e12"]
+[gd_scene load_steps=8 format=3 uid="uid://cf3b54yd85e12"]
 
 [ext_resource type="Script" path="res://Menu/Multiplayer/multiplayer.gd" id="1_hn5x5"]
 [ext_resource type="Theme" uid="uid://5x24b8u3a5n7" path="res://ui_theme.tres" id="2_jvedw"]
 [ext_resource type="AudioStream" uid="uid://dugymmncnaso1" path="res://addons/kenney_interface_sounds/click_002.wav" id="3_ehndb"]
 [ext_resource type="AudioStream" uid="uid://d0uppwgw6dgjf" path="res://addons/kenney_interface_sounds/glass_002.wav" id="3_rat3a"]
 [ext_resource type="AudioStream" uid="uid://bgrfs4a8ldsg2" path="res://addons/kenney_interface_sounds/tick_001.wav" id="4_tfvtu"]
-[ext_resource type="Texture2D" uid="uid://vga2ln504481" path="res://l5k_placeholder.png" id="6_2b5yu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5vijv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r4ukq"]
 
 [node name="Multiplayer" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 960.0
-offset_bottom = 560.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_hn5x5")
-
-[node name="Host" type="Button" parent="."]
-layout_mode = 2
-offset_left = 232.0
-offset_top = 472.0
-offset_right = 314.0
-offset_bottom = 499.0
-theme = ExtResource("2_jvedw")
-text = "Host"
-
-[node name="StartGame" type="Button" parent="."]
-layout_mode = 2
-offset_left = 368.0
-offset_top = 472.0
-offset_right = 450.0
-offset_bottom = 499.0
-disabled = true
-text = "Start level"
-
-[node name="Connect" type="Button" parent="."]
-layout_mode = 2
-offset_left = 96.0
-offset_top = 472.0
-offset_right = 178.0
-offset_bottom = 499.0
-text = "Connect"
-
-[node name="Cancel" type="Button" parent="."]
-layout_mode = 2
-offset_left = 232.0
-offset_top = 512.0
-offset_right = 314.0
-offset_bottom = 539.0
-disabled = true
-text = "Cancel"
-
-[node name="StatusLabel" type="Label" parent="."]
-layout_mode = 2
-offset_left = 232.0
-offset_top = 416.0
-offset_right = 314.0
-offset_bottom = 453.0
-text = "Status:"
-horizontal_alignment = 2
-
-[node name="Status" type="Label" parent="."]
-layout_mode = 2
-offset_left = 320.0
-offset_top = 416.0
-offset_right = 402.0
-offset_bottom = 450.0
+metadata/_edit_vertical_guides_ = []
 
 [node name="StateChangedAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("3_rat3a")
 
 [node name="ButtonClickedAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("3_ehndb")
 
 [node name="ButtonFocusAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("4_tfvtu")
 
-[node name="NameLineEdit" type="LineEdit" parent="."]
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 96.0
-offset_top = 304.0
-offset_right = 314.0
-offset_bottom = 335.0
-text = "Ronald"
-placeholder_text = "Name"
+offset_left = 144.0
+offset_top = 296.0
+offset_right = 312.0
+offset_bottom = 346.0
+theme_override_constants/separation = -1
 
-[node name="IpAddressLineEdit" type="LineEdit" parent="."]
+[node name="IP address" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-offset_left = 96.0
-offset_top = 352.0
-offset_right = 314.0
-offset_bottom = 383.0
+text = "IP address"
+
+[node name="IpAddressLineEdit" type="LineEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "localhost"
 placeholder_text = "IP address"
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 400.0
-offset_right = 142.0
-offset_bottom = 427.0
+[node name="ConnectButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 144.0
+offset_top = 360.0
+offset_right = 312.0
+offset_bottom = 387.0
+text = "Connect"
+
+[node name="HostButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 416.0
+offset_top = 360.0
+offset_right = 489.0
+offset_bottom = 387.0
+theme = ExtResource("2_jvedw")
+text = "Host"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 184.0
+offset_bottom = 210.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 21
+
+[node name="NameBoxContainer" type="VBoxContainer" parent="VBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="NameLabel" type="Label" parent="VBoxContainer3/NameBoxContainer"]
+layout_mode = 2
+text = "Name"
+
+[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer3/NameBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ronald"
+placeholder_text = "Name"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Color" type="Label" parent="VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer3/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5vijv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r4ukq")
 text = "Color"
 color = Color(1, 0, 0, 1)
 edit_alpha = false
 
-[node name="L5kPlaceholder" type="Sprite2D" parent="."]
-position = Vector2(504, 128)
-texture = ExtResource("6_2b5yu")
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -291.0
+offset_top = -181.5
+offset_right = 291.0
+offset_bottom = 181.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
 
-[connection signal="button_down" from="Host" to="." method="_on_host_button_down"]
-[connection signal="focus_entered" from="Host" to="." method="_on_host_focus_entered"]
-[connection signal="button_down" from="StartGame" to="." method="_on_send_hello_to_host_button_down"]
-[connection signal="button_down" from="Connect" to="." method="_on_connect_button_down"]
-[connection signal="button_down" from="Cancel" to="." method="_on_cancel_button_down"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+disabled = true
+text = "Start level"
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+disabled = true
+text = "Cancel"
+
+[node name="StatusBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer/VBoxContainer2/StatusBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Status:"
+horizontal_alignment = 2
+
+[node name="Status" type="Label" parent="VBoxContainer/VBoxContainer2/StatusBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "-1"
+
+[connection signal="button_down" from="ConnectButton" to="." method="_on_connect_button_down"]
+[connection signal="button_down" from="HostButton" to="." method="_on_host_button_down"]
+[connection signal="focus_entered" from="HostButton" to="." method="_on_host_focus_entered"]
+[connection signal="button_down" from="VBoxContainer/VBoxContainer2/StartGameButton" to="." method="_on_send_hello_to_host_button_down"]
+[connection signal="button_down" from="VBoxContainer/VBoxContainer2/CancelButton" to="." method="_on_cancel_button_down"]
