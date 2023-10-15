@@ -64,7 +64,7 @@ func _find_player_character(player_id):
 		player_character = node
 	
 	if not player_character:
-		push_error("Tried to move character that doesn't exist")
+		push_warning("Tried to move character that doesn't exist")
 		return null
 
 	return player_character
