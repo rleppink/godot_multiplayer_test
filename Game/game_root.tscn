@@ -271,10 +271,12 @@ sources/2 = SubResource("TileSetAtlasSource_gicn5")
 script = ExtResource("1_5b42h")
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
 _spawnable_scenes = PackedStringArray("res://Game/player.tscn")
 spawn_path = NodePath(".")
 
 [node name="TileMap" type="TileMap" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_6arbh")
