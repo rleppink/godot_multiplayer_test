@@ -121,9 +121,9 @@ shape = SubResource("RectangleShape2D_n8ql2")
 
 [node name="NameLabel" type="Label" parent="."]
 offset_left = -96.0
-offset_top = -104.0
+offset_top = -80.0
 offset_right = 96.0
-offset_bottom = -67.0
+offset_bottom = -43.0
 text = "no_name"
 label_settings = SubResource("LabelSettings_vg7cy")
 horizontal_alignment = 1
