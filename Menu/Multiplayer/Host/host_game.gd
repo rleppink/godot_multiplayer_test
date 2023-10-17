@@ -1,6 +1,9 @@
 extends Control
 
 
+const MAX_PLAYERS := 6
+
+
 func _ready():
 	LobbyManager.player_joined.connect(_on_player_joined)
 	LobbyManager.player_left.connect(_on_player_left)
@@ -31,10 +34,16 @@ func _on_player_joined(_player_id: int):
 	_build_player_list()
 	%PlayerJoinedAudio.play()
 
+	if LobbyManager.get_all_peers().size() >= MAX_PLAYERS:
+		LobbyManager.stop_accepting_peers()
+
 
 func _on_player_left(_player_id: int):
 	_build_player_list()
 	%PlayerLeftAudio.play()
+
+	if LobbyManager.peers.size() < MAX_PLAYERS:
+		LobbyManager.start_accepting_peers()
 
 
 func _on_back_button_pressed():

@@ -61,6 +61,18 @@ func stop_multiplayering():
 	multiplayer.multiplayer_peer = null
 	state = State.Uninitialized
 	peers = {}
+
+
+func start_accepting_peers():
+	if multiplayer.is_server():
+		print("Start accepting peers")
+		multiplayer.multiplayer_peer.refuse_new_connections = false
+
+
+func stop_accepting_peers():
+	if multiplayer.is_server():
+		print("Stop accepting peers")
+		multiplayer.multiplayer_peer.refuse_new_connections = true
 	
 
 func is_multiplayering():
