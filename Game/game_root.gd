@@ -7,9 +7,11 @@ func _ready() -> void:
 
 
 func _spawn_characters():
-	var i := 1
+	var i := 0
 	for peer_id in LobbyManager.get_all_peer_ids():
-		_spawn_character(Vector2(i * 300, 300), peer_id)
+		_spawn_character(
+				%PlayerSpawnPositions.get_children()[i].position,
+				peer_id)
 		i += 1
 
 
