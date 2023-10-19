@@ -16,7 +16,7 @@ var peers := {}
 
 var my_peer_config := {}
 
-const PORT := 55443
+const PORT := 55568
 
 
 func _ready() -> void:
