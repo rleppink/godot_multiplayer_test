@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 
 const SPEED = 400.0
@@ -7,6 +8,9 @@ const SPEED = 400.0
 @export var player_name: String
 @export var velocity_sync: Vector2
 @export var color: Color
+
+var target_direction: Vector2i
+var center : Vector2
 
 
 func _ready():
@@ -22,6 +26,7 @@ func _process(_delta: float) -> void:
 	process_input()
 
 	z_index = int(round(position.y))
+	center = to_global($CollisionShape2D.position)
 	
 	if velocity_sync:
 		$AnimatedSprite2D.play("walk")
@@ -39,6 +44,9 @@ func process_input():
 		return
 
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if direction:
+		target_direction = direction
+
 	if not multiplayer.is_server():
 		_move(direction)
 
