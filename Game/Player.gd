@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 500.0
+const SPEED = 400.0
 
 @export var player_id: int
 @export var player_name: String
