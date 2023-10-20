@@ -43,7 +43,7 @@ func process_input():
 	if player_id != multiplayer.get_unique_id():
 		return
 
-	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction:
 		target_direction = direction
 
