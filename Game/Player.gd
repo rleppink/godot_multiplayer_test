@@ -31,7 +31,7 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	if player_id == multiplayer.get_unique_id():
-		_process_input()
+		_process_movement()
 		_process_action()
 
 	z_index = int(round(position.y))
@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 	_process_character_animation()
 
 
-func _process_input():
+func _process_movement():
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction:
 		target_direction = direction
@@ -55,22 +55,12 @@ func _process_input():
 	_request_move.rpc(direction)
 
 
-func _process_action():
-	if !Input.is_action_just_pressed("action"):
+@rpc("any_peer", "call_local")
+func _request_move(direction: Vector2):
+	if not multiplayer.is_server():
 		return
-
-	print("Action pressed!")
-
-func _process_character_animation():
-	if velocity_sync:
-		$AnimatedSprite2D.play("walk")
-	else:
-		$AnimatedSprite2D.play("idle")
 	
-	if velocity_sync.x < 0:
-		$AnimatedSprite2D.flip_h = true
-	elif velocity_sync.x > 0:
-		$AnimatedSprite2D.flip_h = false
+	_move(direction)
 
 
 func _move(direction: Vector2):
@@ -82,12 +72,23 @@ func _move(direction: Vector2):
 	move_and_slide()
 
 
-@rpc("any_peer", "call_local")
-func _request_move(direction: Vector2):
-	if not multiplayer.is_server():
+func _process_action():
+	if !Input.is_action_just_pressed("action"):
 		return
+
+	print("Action pressed!")
+
+
+func _process_character_animation():
+	if velocity_sync:
+		$AnimatedSprite2D.play("walk")
+	else:
+		$AnimatedSprite2D.play("idle")
 	
-	_move(direction)
+	if velocity_sync.x < 0:
+		$AnimatedSprite2D.flip_h = true
+	elif velocity_sync.x > 0:
+		$AnimatedSprite2D.flip_h = false
 
 
 func _highlight_target():
