@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 
+signal action_requested
+
 const SPEED = 400.0
 
 @export var player_id: int
@@ -11,6 +13,7 @@ const SPEED = 400.0
 
 var target_direction: Vector2i
 var center : Vector2
+var tile_map : TileMap
 
 
 func _ready():
@@ -21,13 +24,44 @@ func _ready():
 		0.8 + clamp(color.b, 0.0, 0.5),
 		255)
 
+	if player_id == multiplayer.get_unique_id():
+		%Target.visible = true
+		_tween_target()
+
 
 func _process(_delta: float) -> void:
-	process_input()
+	if player_id == multiplayer.get_unique_id():
+		_process_input()
+		_process_action()
 
 	z_index = int(round(position.y))
+
 	center = to_global($CollisionShape2D.position)
-	
+
+	if player_id == multiplayer.get_unique_id():
+		_highlight_target()
+
+	_process_character_animation()
+
+
+func _process_input():
+	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if direction:
+		target_direction = direction
+
+	if not multiplayer.is_server():
+		_move(direction)
+
+	_request_move.rpc(direction)
+
+
+func _process_action():
+	if !Input.is_action_just_pressed("action"):
+		return
+
+	print("Action pressed!")
+
+func _process_character_animation():
 	if velocity_sync:
 		$AnimatedSprite2D.play("walk")
 	else:
@@ -37,20 +71,6 @@ func _process(_delta: float) -> void:
 		$AnimatedSprite2D.flip_h = true
 	elif velocity_sync.x > 0:
 		$AnimatedSprite2D.flip_h = false
-
-
-func process_input():
-	if player_id != multiplayer.get_unique_id():
-		return
-
-	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if direction:
-		target_direction = direction
-
-	if not multiplayer.is_server():
-		_move(direction)
-
-	_request_move.rpc(direction)
 
 
 func _move(direction: Vector2):
@@ -68,3 +88,18 @@ func _request_move(direction: Vector2):
 		return
 	
 	_move(direction)
+
+
+func _highlight_target():
+	var local_position : Vector2i = tile_map.to_local(center)
+	var cell : Vector2i = tile_map.local_to_map(local_position)
+	var target_cell := cell + target_direction
+	var cell_local_position : Vector2 = tile_map.map_to_local(target_cell)
+	%Target.position = tile_map.to_global(cell_local_position)
+
+
+func _tween_target():
+	var tween := create_tween()
+	tween.set_loops()
+	tween.tween_property(%Target, "scale", Vector2(-0.5, -0.5), 0.16).as_relative()
+	tween.tween_property(%Target, "scale", Vector2(0.5, 0.5), 0.16).as_relative()

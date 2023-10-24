@@ -17,6 +17,8 @@ func _spawn_characters() -> void:
 		i += 1
 
 
+## MultiplayerSpawner's spawn_function
+## Runs on every peer, spawn_data is received from server
 func _spawn_character(spawn_data: Dictionary) -> Player:
 	var character = preload("res://Game/player.tscn").instantiate()
 	character.position = spawn_data.spawn_position
@@ -24,6 +26,7 @@ func _spawn_character(spawn_data: Dictionary) -> Player:
 	character.player_id = spawn_data.id
 	character.player_name = spawn_data.name
 	character.color = spawn_data.color
+	character.tile_map = %TileMap
 
 	return character
 

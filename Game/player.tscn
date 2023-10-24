@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://baelahkev0v4i"]
+[gd_scene load_steps=16 format=3 uid="uid://baelahkev0v4i"]
 
 [ext_resource type="Script" path="res://Game/Player.gd" id="1_0o1cj"]
+[ext_resource type="Texture2D" uid="uid://dqoxeuwlcwbiy" path="res://addons/selection.png" id="3_0sm08"]
 [ext_resource type="Texture2D" uid="uid://d04w2766dyune" path="res://addons/kenney_toon-characters-1/Male adventurer/Tilesheet/character_maleAdventurer_sheetHD.png" id="3_iuib4"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0mqwg"]
@@ -129,3 +130,12 @@ label_settings = SubResource("LabelSettings_vg7cy")
 horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 3
+
+[node name="DontMoveWithPlayer" type="Node" parent="."]
+
+[node name="Target" type="Sprite2D" parent="DontMoveWithPlayer"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(4, 4)
+texture = ExtResource("3_0sm08")

@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://r86kn06yhc03"]
+[gd_scene load_steps=5 format=3 uid="uid://r86kn06yhc03"]
 
 [ext_resource type="Script" path="res://Game/game_root.gd" id="1_5b42h"]
 [ext_resource type="Texture2D" uid="uid://42am3jiw8378" path="res://addons/sand_packed.png" id="2_3xlnf"]
-[ext_resource type="Texture2D" uid="uid://dqoxeuwlcwbiy" path="res://addons/selection.png" id="3_0763t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_py61v"]
 resource_name = "blocks"
@@ -315,8 +314,3 @@ position = Vector2(128, 448)
 
 [node name="5" type="Marker2D" parent="PlayerSpawnPositions"]
 position = Vector2(1024, 448)
-
-[node name="Target" type="Sprite2D" parent="."]
-position = Vector2(288, 224)
-scale = Vector2(4, 4)
-texture = ExtResource("3_0763t")
