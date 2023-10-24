@@ -95,7 +95,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n8ql2"]
-size = Vector2(30, 28.5)
+size = Vector2(34, 28.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_vg7cy"]
 font_size = 24
@@ -111,12 +111,12 @@ script = ExtResource("1_0o1cj")
 replication_config = SubResource("SceneReplicationConfig_0mqwg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.45, 0.45)
 sprite_frames = SubResource("SpriteFrames_73cqi")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 37.25)
+position = Vector2(0, 43)
 shape = SubResource("RectangleShape2D_n8ql2")
 
 [node name="NameLabel" type="Label" parent="."]
