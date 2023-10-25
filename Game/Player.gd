@@ -52,7 +52,7 @@ func _process_movement():
 	if not multiplayer.is_server():
 		_move(direction)
 
-	_request_move.rpc(direction)
+	_request_move.rpc_id(1, direction)
 
 
 @rpc("any_peer", "call_local")
