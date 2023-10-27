@@ -34,6 +34,9 @@ func _process(_delta: float) -> void:
 		_process_movement()
 		_process_action()
 
+	if not multiplayer.is_server():
+		velocity = velocity_sync
+
 	z_index = int(round(position.y))
 
 	center = to_global($CollisionShape2D.position)
@@ -79,7 +82,20 @@ func _process_action():
 	if !Input.is_action_just_pressed("action"):
 		return
 
-	print("Action pressed!")
+	_request_action.rpc_id(1, _get_my_tilemap_target())
+
+
+@rpc("any_peer", "call_local", "reliable")
+func _request_action(target: Vector2i):
+	if not multiplayer.is_server():
+		return
+
+	_remove_tile.rpc(target)
+
+
+@rpc("authority", "call_local", "reliable")
+func _remove_tile(target: Vector2i):
+	tile_map.set_cell(1, target)
 
 
 func _process_character_animation():
@@ -94,11 +110,17 @@ func _process_character_animation():
 		$AnimatedSprite2D.flip_h = false
 
 
-func _highlight_target():
+func _get_my_tilemap_position() -> Vector2i:
 	var local_position : Vector2i = tile_map.to_local(center)
-	var cell : Vector2i = tile_map.local_to_map(local_position)
-	var target_cell := cell + target_direction
-	var cell_local_position : Vector2 = tile_map.map_to_local(target_cell)
+	return tile_map.local_to_map(local_position)
+
+
+func _get_my_tilemap_target() -> Vector2i:
+	return _get_my_tilemap_position() + target_direction
+
+
+func _highlight_target():
+	var cell_local_position : Vector2 = tile_map.map_to_local(_get_my_tilemap_target())
 	%Target.position = tile_map.to_global(cell_local_position)
 
 
