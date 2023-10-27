@@ -49,6 +49,9 @@ func _process_movement():
 	if direction:
 		target_direction = direction
 
+	# Simple client side prediction
+	# If the server has a different value, it will be synchronized to the
+	# client, overwriting what the client thinks is its position
 	if not multiplayer.is_server():
 		_move(direction)
 
