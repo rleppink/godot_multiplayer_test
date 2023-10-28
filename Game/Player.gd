@@ -108,6 +108,12 @@ func _pickup_or_place_tile(target: Vector2i):
 		carrying_block.source_id = source_id
 		carrying_block.atlas_coords = tile_map.get_cell_atlas_coords(1, target)
 
+		%CarriedBlock.region_rect = Rect2(
+				18 * carrying_block.atlas_coords.x,
+				18 * carrying_block.atlas_coords.y,
+				18,
+				18)
+
 		tile_map.erase_cell(1, target)
 	else:
 		if tile_map.get_cell_source_id(1, target) != -1:

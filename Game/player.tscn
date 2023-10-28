@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Game/Player.gd" id="1_0o1cj"]
 [ext_resource type="SpriteFrames" uid="uid://jortxuc7hkes" path="res://assets/player_sprites.tres" id="2_xmbx0"]
 [ext_resource type="Texture2D" uid="uid://dqoxeuwlcwbiy" path="res://assets/selection.png" id="3_2wou6"]
-[ext_resource type="Texture2D" uid="uid://b1xcx405e2uhs" path="res://assets/block.png" id="4_1uigo"]
+[ext_resource type="Texture2D" uid="uid://42am3jiw8378" path="res://assets/sand_packed.png" id="4_y6v0r"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0mqwg"]
 properties/0/path = NodePath(".:position")
@@ -77,4 +77,6 @@ unique_name_in_owner = true
 visible = false
 position = Vector2(0, 34)
 scale = Vector2(2, 2)
-texture = ExtResource("4_1uigo")
+texture = ExtResource("4_y6v0r")
+region_enabled = true
+region_rect = Rect2(72, 72, 18, 18)
