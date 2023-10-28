@@ -14,10 +14,10 @@ const SPEED = 400.0
 var target_direction: Vector2i
 var center : Vector2
 var tile_map : TileMap
-var carrying_block : bool :
+var carrying_block : BlockTile :
 		set (value):
 			carrying_block = value
-			%CarriedBlock.visible = value
+			%CarriedBlock.visible = carrying_block != null
 
 
 func _ready():
@@ -94,14 +94,32 @@ func _request_action(target: Vector2i):
 	if not multiplayer.is_server():
 		return
 
-	_pickup_tile.rpc(target)
+	_pickup_or_place_tile.rpc(target)
 
 
 @rpc("authority", "call_local", "reliable")
-func _pickup_tile(target: Vector2i):
+func _pickup_or_place_tile(target: Vector2i):
 	if not carrying_block:
-		carrying_block = true
-		tile_map.set_cell(1, target)
+		var source_id := tile_map.get_cell_source_id(1, target)
+		if source_id == -1:
+			return
+
+		carrying_block = BlockTile.new()
+		carrying_block.source_id = source_id
+		carrying_block.atlas_coords = tile_map.get_cell_atlas_coords(1, target)
+
+		tile_map.erase_cell(1, target)
+	else:
+		if tile_map.get_cell_source_id(1, target) != -1:
+			return
+
+		tile_map.set_cell(
+				1,
+				target,
+				carrying_block.source_id,
+				carrying_block.atlas_coords)
+
+		carrying_block = null
 
 
 func _process_character_animation():
