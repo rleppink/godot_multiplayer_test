@@ -6,3 +6,5 @@
 
 # Don't want this in git repo, used assets go in assets/
 addons/
+
+_export/
