@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5rts0i6mngll"]
 
 [ext_resource type="Script" path="res://Menu/Multiplayer/Host/host_game.gd" id="1_qap6e"]
-[ext_resource type="AudioStream" uid="uid://c87ce6doi28xo" path="res://addons/kenney_interface_sounds/maximize_008.wav" id="2_hylam"]
-[ext_resource type="AudioStream" uid="uid://pjksqgk3svd4" path="res://addons/kenney_interface_sounds/minimize_008.wav" id="3_y02ub"]
+[ext_resource type="AudioStream" uid="uid://dcq4pwdfxjidw" path="res://assets/player_joined_audio.tres" id="2_ksepd"]
+[ext_resource type="AudioStream" uid="uid://d3kjbcsiddgj0" path="res://assets/player_left_audio.tres" id="3_gd8fm"]
 
 [node name="HostGame" type="Control"]
 layout_mode = 3
@@ -60,11 +60,11 @@ text = "Back"
 
 [node name="PlayerJoinedAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_hylam")
+stream = ExtResource("2_ksepd")
 
 [node name="PlayerLeftAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_y02ub")
+stream = ExtResource("3_gd8fm")
 
 [connection signal="pressed" from="VBoxContainer/StartLevel" to="." method="_on_start_level_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

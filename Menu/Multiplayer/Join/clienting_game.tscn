@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ctclvkl6myaa1"]
 
 [ext_resource type="Script" path="res://Menu/Multiplayer/Join/clienting_game.gd" id="1_cfo6k"]
-[ext_resource type="AudioStream" uid="uid://c87ce6doi28xo" path="res://addons/kenney_interface_sounds/maximize_008.wav" id="2_h5xue"]
-[ext_resource type="AudioStream" uid="uid://pjksqgk3svd4" path="res://addons/kenney_interface_sounds/minimize_008.wav" id="3_o0ty3"]
+[ext_resource type="AudioStream" uid="uid://dcq4pwdfxjidw" path="res://assets/player_joined_audio.tres" id="2_xyui4"]
+[ext_resource type="AudioStream" uid="uid://d3kjbcsiddgj0" path="res://assets/player_left_audio.tres" id="3_5hqxp"]
 
 [node name="ClientingGame" type="Control"]
 layout_mode = 3
@@ -44,10 +44,10 @@ text = "Back"
 
 [node name="PlayerJoinedAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_h5xue")
+stream = ExtResource("2_xyui4")
 
 [node name="PlayerLeftAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_o0ty3")
+stream = ExtResource("3_5hqxp")
 
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

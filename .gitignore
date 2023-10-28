@@ -3,3 +3,6 @@
 
 # macOS specific ignore
 .DS_Store
+
+# Don't want this in git repo, used assets go in assets/
+addons/

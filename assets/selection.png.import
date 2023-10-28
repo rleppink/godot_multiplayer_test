@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://42am3jiw8378"
-path="res://.godot/imported/sand_packed.png-9402c431a97f5c69b8484bd219b14e66.ctex"
+uid="uid://dqoxeuwlcwbiy"
+path="res://.godot/imported/selection.png-fb5449805f2ef00ca05e408b4d47d602.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/sand_packed.png"
-dest_files=["res://.godot/imported/sand_packed.png-9402c431a97f5c69b8484bd219b14e66.ctex"]
+source_file="res://assets/selection.png"
+dest_files=["res://.godot/imported/selection.png-fb5449805f2ef00ca05e408b4d47d602.ctex"]
 
 [params]
 
