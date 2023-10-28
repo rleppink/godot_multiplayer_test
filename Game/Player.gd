@@ -2,8 +2,6 @@ extends CharacterBody2D
 class_name Player
 
 
-signal action_requested
-
 const SPEED = 400.0
 
 @export var player_id: int
