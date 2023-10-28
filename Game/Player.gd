@@ -98,13 +98,13 @@ func _request_action(target: Vector2i):
 @rpc("authority", "call_local", "reliable")
 func _pickup_or_place_tile(target: Vector2i):
 	if not carrying_block:
-		var source_id := tile_map.get_cell_source_id(1, target)
+		var source_id := tile_map.get_cell_source_id(2, target)
 		if source_id == -1:
 			return
 
 		carrying_block = BlockTile.new()
 		carrying_block.source_id = source_id
-		carrying_block.atlas_coords = tile_map.get_cell_atlas_coords(1, target)
+		carrying_block.atlas_coords = tile_map.get_cell_atlas_coords(2, target)
 
 		%CarriedBlock.region_rect = Rect2(
 				18 * carrying_block.atlas_coords.x,
@@ -112,13 +112,14 @@ func _pickup_or_place_tile(target: Vector2i):
 				18,
 				18)
 
-		tile_map.erase_cell(1, target)
+		tile_map.erase_cell(2, target)
 	else:
-		if tile_map.get_cell_source_id(1, target) != -1:
+		if tile_map.get_cell_source_id(1, target) != -1 || \
+				tile_map.get_cell_source_id(2, target) != -1:
 			return
 
 		tile_map.set_cell(
-				1,
+				2,
 				target,
 				carrying_block.source_id,
 				carrying_block.atlas_coords)
