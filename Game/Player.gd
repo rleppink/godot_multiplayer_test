@@ -14,6 +14,10 @@ const SPEED = 400.0
 var target_direction: Vector2i
 var center : Vector2
 var tile_map : TileMap
+var carrying_block : bool :
+		set (value):
+			carrying_block = value
+			%CarriedBlock.visible = value
 
 
 func _ready():
@@ -90,12 +94,14 @@ func _request_action(target: Vector2i):
 	if not multiplayer.is_server():
 		return
 
-	_remove_tile.rpc(target)
+	_pickup_tile.rpc(target)
 
 
 @rpc("authority", "call_local", "reliable")
-func _remove_tile(target: Vector2i):
-	tile_map.set_cell(1, target)
+func _pickup_tile(target: Vector2i):
+	if not carrying_block:
+		carrying_block = true
+		tile_map.set_cell(1, target)
 
 
 func _process_character_animation():

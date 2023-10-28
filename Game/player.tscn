@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://baelahkev0v4i"]
+[gd_scene load_steps=8 format=3 uid="uid://baelahkev0v4i"]
 
 [ext_resource type="Script" path="res://Game/Player.gd" id="1_0o1cj"]
+[ext_resource type="SpriteFrames" uid="uid://jortxuc7hkes" path="res://assets/player_sprites.tres" id="2_xmbx0"]
 [ext_resource type="Texture2D" uid="uid://dqoxeuwlcwbiy" path="res://assets/selection.png" id="3_2wou6"]
-[ext_resource type="Texture2D" uid="uid://d04w2766dyune" path="res://addons/kenney_toon-characters-1/Male adventurer/Tilesheet/character_maleAdventurer_sheetHD.png" id="3_iuib4"]
+[ext_resource type="Texture2D" uid="uid://b1xcx405e2uhs" path="res://assets/block.png" id="4_1uigo"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0mqwg"]
 properties/0/path = NodePath(".:position")
@@ -26,75 +27,6 @@ properties/4/spawn = true
 properties/4/sync = false
 properties/4/watch = false
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1rcra"]
-atlas = ExtResource("3_iuib4")
-region = Rect2(0, 0, 192, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w0joa"]
-atlas = ExtResource("3_iuib4")
-region = Rect2(192, 1024, 192, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jyjo7"]
-atlas = ExtResource("3_iuib4")
-region = Rect2(384, 1024, 192, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hn6ix"]
-atlas = ExtResource("3_iuib4")
-region = Rect2(576, 1024, 192, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fi40p"]
-atlas = ExtResource("3_iuib4")
-region = Rect2(768, 1024, 192, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qlc2o"]
-atlas = ExtResource("3_iuib4")
-region = Rect2(960, 1024, 192, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e5kxh"]
-atlas = ExtResource("3_iuib4")
-region = Rect2(1152, 1024, 192, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_87i04"]
-atlas = ExtResource("3_iuib4")
-region = Rect2(1344, 1024, 192, 256)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_73cqi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1rcra")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w0joa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jyjo7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hn6ix")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fi40p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qlc2o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e5kxh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_87i04")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 10.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n8ql2"]
 size = Vector2(34, 28.5)
 
@@ -113,8 +45,8 @@ replication_config = SubResource("SceneReplicationConfig_0mqwg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.45, 0.45)
-sprite_frames = SubResource("SpriteFrames_73cqi")
-animation = &"idle"
+sprite_frames = ExtResource("2_xmbx0")
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 43)
@@ -139,3 +71,10 @@ visible = false
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(4, 4)
 texture = ExtResource("3_2wou6")
+
+[node name="CarriedBlock" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 34)
+scale = Vector2(2, 2)
+texture = ExtResource("4_1uigo")
