@@ -127,15 +127,21 @@ func _throw_block(target: Vector2i, target_direction: Vector2i):
 			var thrown_block = preload("res://Game/thrown_block.tscn").instantiate()
 			thrown_block.position = position
 			thrown_block.target_position = tile_map.map_to_global(target_cell)
-			%DontMoveWithPlayer.add_child(thrown_block)
 
-			tile_map.set_cell(
-					2,
-					target_cell,
-					carrying_block.source_id,
-					carrying_block.atlas_coords)
+			# `carrying_block` will be null when this function runs, so copy the
+			# variables we need
+			var source_id := carrying_block.source_id
+			var atlas_coords := carrying_block.atlas_coords
+			thrown_block.tween_finished = func():
+				tile_map.set_cell(
+						2,
+						target_cell,
+						source_id,
+						atlas_coords)
 
 			carrying_block = null
+			%DontMoveWithPlayer.add_child(thrown_block)
+
 		_:
 			return
 
