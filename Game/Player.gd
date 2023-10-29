@@ -124,6 +124,11 @@ func _pickup_block(target: Vector2i):
 func _throw_block(target: Vector2i, target_direction: Vector2i):
 	match _find_target_cell(target, target_direction):
 		[true, var target_cell]:
+			var thrown_block = preload("res://Game/thrown_block.tscn").instantiate()
+			thrown_block.position = position
+			thrown_block.target_position = tile_map.map_to_global(target_cell)
+			%DontMoveWithPlayer.add_child(thrown_block)
+
 			tile_map.set_cell(
 					2,
 					target_cell,
@@ -167,8 +172,7 @@ func _get_my_tilemap_target() -> Vector2i:
 
 
 func _highlight_target():
-	var cell_local_position : Vector2 = tile_map.map_to_local(_get_my_tilemap_target())
-	%Target.position = tile_map.to_global(cell_local_position)
+	%Target.position = tile_map.map_to_global(_get_my_tilemap_target())
 
 
 func _tween_target():

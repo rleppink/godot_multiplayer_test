@@ -64,6 +64,7 @@ vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="DontMoveWithPlayer" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="Target" type="Sprite2D" parent="DontMoveWithPlayer"]
 unique_name_in_owner = true

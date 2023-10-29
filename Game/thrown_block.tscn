@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://collbin13hj3y"]
+
+[ext_resource type="Script" path="res://Game/thrown_block.gd" id="1_8kqwx"]
+[ext_resource type="Texture2D" uid="uid://42am3jiw8378" path="res://assets/sand_packed.png" id="1_hah81"]
+
+[node name="ThrownBlock" type="Node2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_8kqwx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 4096
+scale = Vector2(4, 4)
+texture = ExtResource("1_hah81")
+region_enabled = true
+region_rect = Rect2(126, 18, 18, 18)
