@@ -84,24 +84,24 @@ func _process_action():
 	if !Input.is_action_just_pressed("action"):
 		return
 
-	_request_action.rpc_id(1, _get_my_tilemap_target())
+	_request_action.rpc_id(1, _get_my_tilemap_target(), target_direction)
 
 
 @rpc("any_peer", "call_local", "reliable")
-func _request_action(target: Vector2i):
+func _request_action(target: Vector2i, target_direction: Vector2i):
 	if not multiplayer.is_server():
 		return
 
-	_pickup_or_throw_block.rpc(target)
+	_pickup_or_throw_block.rpc(target, target_direction)
 
 
 @rpc("authority", "call_local", "reliable")
-func _pickup_or_throw_block(target: Vector2i):
+func _pickup_or_throw_block(target: Vector2i, target_direction: Vector2i):
 	if not carrying_block:
 		_pickup_block(target)
 	else:
-		_throw_block(target)
-
+		_throw_block(target, target_direction)
+ 
 
 func _pickup_block(target: Vector2i):
 	var source_id := tile_map.get_cell_source_id(2, target)
@@ -121,18 +121,28 @@ func _pickup_block(target: Vector2i):
 	tile_map.erase_cell(2, target)
 
 
-func _throw_block(target: Vector2i):
-	if tile_map.get_cell_source_id(1, target) != -1 || \
-			tile_map.get_cell_source_id(2, target) != -1:
-		return
+func _throw_block(target: Vector2i, target_direction: Vector2i):
+	match _find_target_cell(target, target_direction):
+		[true, var target_cell]:
+			tile_map.set_cell(
+					2,
+					target_cell,
+					carrying_block.source_id,
+					carrying_block.atlas_coords)
 
-	tile_map.set_cell(
-			2,
-			target,
-			carrying_block.source_id,
-			carrying_block.atlas_coords)
+			carrying_block = null
+		_:
+			return
 
-	carrying_block = null
+
+func _find_target_cell(target: Vector2i, target_direction: Vector2i) -> Array:
+	if not tile_map.in_bounds(target):
+		return [false, Vector2.ZERO]
+
+	if tile_map.is_empty(target):
+		return [true, target]
+	
+	return _find_target_cell(target + target_direction, target_direction)
 
 
 func _process_character_animation():
