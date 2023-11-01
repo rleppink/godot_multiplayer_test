@@ -30,5 +30,8 @@ func _ready():
 
 
 func _tween_finished():
+	$AudioStreamPlayer2D.play()
 	tween_finished.call()
+	$Sprite2D.visible = false
+	await $AudioStreamPlayer2D.finished
 	queue_free()
