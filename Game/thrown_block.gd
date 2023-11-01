@@ -7,7 +7,7 @@ var tween_finished: Callable = func(): push_error("Tween finished not initialize
 
 func _ready():
 	var throw_distance := position.distance_to(target_position)
-	var throw_time := throw_distance / 750
+	var throw_time := throw_distance / 1000
 	var throw_offset := throw_distance / 15
 
 	var offset_tween := create_tween()
