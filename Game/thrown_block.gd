@@ -30,6 +30,8 @@ func _ready():
 
 
 func _tween_finished():
+	$AudioStreamPlayer2D.volume_db = randf_range(-7, 7)
+	$AudioStreamPlayer2D.pitch_scale = randf_range(0.5, 1.5)
 	$AudioStreamPlayer2D.play()
 	tween_finished.call()
 	$Sprite2D.visible = false
