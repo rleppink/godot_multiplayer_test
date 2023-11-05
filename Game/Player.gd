@@ -140,6 +140,9 @@ func _throw_block(target: Vector2i, target_direction: Vector2i):
 						atlas_coords)
 
 			carrying_block = null
+			%ThrowSound.volume_db = randf_range(-7, 7)
+			%ThrowSound.pitch_scale = randf_range(0.5, 1.5)
+			%ThrowSound.play()
 			%DontMoveWithPlayer.add_child(thrown_block)
 
 		_:

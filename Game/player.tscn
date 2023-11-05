@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://baelahkev0v4i"]
+[gd_scene load_steps=9 format=3 uid="uid://baelahkev0v4i"]
 
 [ext_resource type="Script" path="res://Game/Player.gd" id="1_0o1cj"]
 [ext_resource type="SpriteFrames" uid="uid://jortxuc7hkes" path="res://assets/player_sprites.tres" id="2_xmbx0"]
 [ext_resource type="Texture2D" uid="uid://dqoxeuwlcwbiy" path="res://assets/selection.png" id="3_2wou6"]
 [ext_resource type="Texture2D" uid="uid://42am3jiw8378" path="res://assets/sand_packed.png" id="4_y6v0r"]
+[ext_resource type="AudioStream" uid="uid://bhjlwm6mn5kjs" path="res://assets/throw.wav" id="5_hth1p"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0mqwg"]
 properties/0/path = NodePath(".:position")
@@ -81,3 +82,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_y6v0r")
 region_enabled = true
 region_rect = Rect2(72, 72, 18, 18)
+
+[node name="ThrowSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_hth1p")
