@@ -149,6 +149,7 @@ func _throw_block(target: Vector2i, target_direction: Vector2i):
 			var thrown_block = preload("res://Game/thrown_block.tscn").instantiate()
 			thrown_block.position = position
 			thrown_block.target_position = tile_map.map_to_global(target_cell)
+			thrown_block.thrower_id = multiplayer.get_unique_id()
 
 			# `carrying_block` will be null when this function runs, so copy the
 			# variables we need

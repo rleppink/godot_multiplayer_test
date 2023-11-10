@@ -4,6 +4,8 @@ extends Node2D
 var target_position: Vector2 = Vector2(0, 0)
 var tween_finished: Callable = func(): push_error("Tween finished not initialized!")
 
+var thrower_id: int
+
 
 func _ready():
 	var throw_distance := position.distance_to(target_position)
@@ -52,6 +54,9 @@ func impact_players() -> void:
 
 	for overlapping_body in $ImpactArea.get_overlapping_bodies() :
 		if not overlapping_body is Player:
+			continue
+
+		if overlapping_body.player_id == thrower_id:
 			continue
 
 		overlapping_body.impact()
