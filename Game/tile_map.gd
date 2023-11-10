@@ -14,3 +14,10 @@ func is_empty(cell: Vector2i) -> bool:
 
 func map_to_global(cell: Vector2i) -> Vector2:
     return to_global(map_to_local(cell))
+
+
+func block_pickup(
+        target_cell: Vector2i,
+        source_id: int,
+        atlas_coords: Vector2i) -> void:
+    set_cell(2, target_cell, source_id, atlas_coords)
