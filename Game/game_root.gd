@@ -6,6 +6,7 @@ func _ready() -> void:
 
 	if multiplayer.is_server():
 		_spawn_characters()
+		$RestartButton.visible = true
 
 
 func _spawn_characters() -> void:
@@ -41,3 +42,14 @@ func _build_spawn_data(player_id: int, spawn_position_index: int) -> Dictionary:
 	}
 
 	return spawn_data
+
+
+func _on_restart_button_pressed():
+	if not multiplayer.is_server():
+		return
+
+	restart_game.rpc()
+
+@rpc("authority", "call_local")
+func restart_game() -> void:
+	get_tree().reload_current_scene()

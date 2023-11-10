@@ -62,3 +62,13 @@ position = Vector2(128, 448)
 
 [node name="5" type="Marker2D" parent="PlayerSpawnPositions"]
 position = Vector2(1024, 448)
+
+[node name="RestartButton" type="Button" parent="."]
+visible = false
+offset_left = 1257.0
+offset_top = 762.0
+offset_right = 1318.0
+offset_bottom = 789.0
+text = "Restart"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
