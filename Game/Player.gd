@@ -26,6 +26,8 @@ func _ready():
 		0.8 + clamp(color.b, 0.0, 0.5),
 		255)
 
+	$BlockSpawner.spawn_function = _spawn_block
+
 	if player_id == multiplayer.get_unique_id():
 		%Target.visible = true
 		_tween_target()
@@ -114,15 +116,18 @@ func _request_action(target: Vector2i, target_direction: Vector2i):
 	if not multiplayer.is_server():
 		return
 
-	_pickup_or_throw_block.rpc(target, target_direction)
+	_pickup_or_throw_block.rpc(
+			multiplayer.get_remote_sender_id(),
+			target,
+			target_direction)
 
 
 @rpc("authority", "call_local", "reliable")
-func _pickup_or_throw_block(target: Vector2i, target_direction: Vector2i):
+func _pickup_or_throw_block(thrower_id: int, target: Vector2i, target_direction: Vector2i):
 	if not carrying_block:
 		_pickup_block(target)
 	else:
-		_throw_block(target, target_direction)
+		_throw_block(thrower_id, target, target_direction)
  
 
 func _pickup_block(target: Vector2i):
@@ -143,33 +148,42 @@ func _pickup_block(target: Vector2i):
 	tile_map.block_pickup(target)
 
 
-func _throw_block(target: Vector2i, target_direction: Vector2i):
+func _throw_block(thrower_id: int, target: Vector2i, target_direction: Vector2i):
 	match _find_throw_target_cell(target, target_direction):
 		[true, var target_cell]:
-			var thrown_block = preload("res://Game/thrown_block.tscn").instantiate()
-			thrown_block.position = position
-			thrown_block.target_position = tile_map.map_to_global(target_cell)
-			thrown_block.thrower_id = multiplayer.get_unique_id()
-
-			# `carrying_block` will be null when this function runs, so copy the
-			# variables we need
-			var source_id := carrying_block.source_id
-			var atlas_coords := carrying_block.atlas_coords
-			thrown_block.tween_finished = func(): 
-				tile_map.set_cell(
- 						2,
- 						target_cell,
- 						source_id,
- 						atlas_coords)
+			var thrown_block : ThrownBlock = $BlockSpawner.spawn({
+				"position": position,
+				"target_cell": target_cell,
+				"target_position": tile_map.map_to_global(target_cell),
+				"thrower_id": thrower_id,
+				"source_id": carrying_block.source_id,
+				"atlas_coords": carrying_block.atlas_coords
+			})
 
 			carrying_block = null
+
 			%ThrowSound.volume_db = randf_range(-7, 7)
 			%ThrowSound.pitch_scale = randf_range(0.5, 1.5)
 			%ThrowSound.play()
-			%DontMoveWithPlayer.add_child(thrown_block)
 
 		_:
 			return
+
+
+func _spawn_block(spawn_data: Dictionary) -> ThrownBlock:
+	var thrown_block = preload("res://Game/thrown_block.tscn").instantiate()
+	thrown_block.position = spawn_data.position
+	thrown_block.target_position = spawn_data.target_position
+	thrown_block.thrower_id = spawn_data.thrower_id
+
+	thrown_block.tween_finished = func(): 
+		tile_map.set_cell(
+				2,
+				spawn_data.target_cell,
+				spawn_data.source_id,
+				spawn_data.atlas_coords)
+
+	return thrown_block
 
 
 func _find_throw_target_cell(target: Vector2i, target_direction: Vector2i) -> Array:

@@ -45,6 +45,9 @@ script = ExtResource("1_0o1cj")
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_0mqwg")
 
+[node name="BlockSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../DontMoveWithPlayer")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(0.45, 0.45)

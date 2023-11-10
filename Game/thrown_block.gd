@@ -1,4 +1,5 @@
 extends Node2D
+class_name ThrownBlock
 
 
 var target_position: Vector2 = Vector2(0, 0)
