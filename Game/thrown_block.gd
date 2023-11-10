@@ -33,8 +33,25 @@ func _tween_finished():
 	$AudioStreamPlayer2D.volume_db = randf_range(-7, 7)
 	$AudioStreamPlayer2D.pitch_scale = randf_range(0.5, 1.5)
 	$AudioStreamPlayer2D.play()
+
+	impact_players()
+
 	tween_finished.call()
+
 	$Shadow.visible = false
 	$Block.visible = false
+
 	await $AudioStreamPlayer2D.finished
+
 	queue_free()
+
+
+func impact_players() -> void:
+	if not multiplayer.is_server():
+		return
+
+	for overlapping_body in $ImpactArea.get_overlapping_bodies() :
+		if not overlapping_body is Player:
+			continue
+
+		overlapping_body.impact()

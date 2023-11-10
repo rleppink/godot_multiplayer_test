@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://collbin13hj3y"]
+[gd_scene load_steps=5 format=3 uid="uid://collbin13hj3y"]
 
 [ext_resource type="Script" path="res://Game/thrown_block.gd" id="1_8kqwx"]
 [ext_resource type="Texture2D" uid="uid://42am3jiw8378" path="res://assets/sand_packed.png" id="1_hah81"]
 [ext_resource type="AudioStream" uid="uid://dpw4slaakqbk8" path="res://addons/kenney_impact-sounds/Audio/impactPlank_medium_000.wav" id="3_10a7e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ouopj"]
+size = Vector2(18, 18)
 
 [node name="ThrownBlock" type="Node2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -26,3 +29,11 @@ region_rect = Rect2(126, 18, 18, 18)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_10a7e")
+
+[node name="ImpactArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactArea"]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_ouopj")

@@ -49,6 +49,28 @@ func _process(_delta: float) -> void:
 	_process_character_animation()
 
 
+func impact() -> void:
+	if not multiplayer.is_server():
+		return
+
+	die.rpc()
+
+
+@rpc("authority", "call_local")
+func die() -> void:
+	set_process(false)
+	%DeathSound.play()
+	%Target.visible = false
+	%CollisionShape2D.disabled = true
+	%NameLabel.visible = false
+
+	var tween_sprite := create_tween()
+	tween_sprite.tween_property(%AnimatedSprite2D, "offset", Vector2(0, 2000), 0.3) \
+			.as_relative() \
+			.set_ease(Tween.EASE_IN) \
+			.set_trans(Tween.TRANS_BACK)
+
+
 func _process_movement():
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction:
