@@ -144,7 +144,7 @@ func _pickup_block(target: Vector2i):
 
 
 func _throw_block(target: Vector2i, target_direction: Vector2i):
-	match _find_target_cell(target, target_direction):
+	match _find_throw_target_cell(target, target_direction):
 		[true, var target_cell]:
 			var thrown_block = preload("res://Game/thrown_block.tscn").instantiate()
 			thrown_block.position = position
@@ -171,14 +171,14 @@ func _throw_block(target: Vector2i, target_direction: Vector2i):
 			return
 
 
-func _find_target_cell(target: Vector2i, target_direction: Vector2i) -> Array:
+func _find_throw_target_cell(target: Vector2i, target_direction: Vector2i) -> Array:
 	if not tile_map.in_bounds(target):
 		return [false, Vector2.ZERO]
 
 	if tile_map.is_empty(target):
 		return [true, target]
 	
-	return _find_target_cell(target + target_direction, target_direction)
+	return _find_throw_target_cell(target + target_direction, target_direction)
 
 
 func _process_character_animation():
@@ -203,7 +203,23 @@ func _get_my_tilemap_target() -> Vector2i:
 
 
 func _highlight_target():
-	%Target.position = tile_map.map_to_global(_get_my_tilemap_target())
+	var my_target := _get_my_tilemap_target()
+	if carrying_block:
+		match _find_throw_target_cell(
+				my_target, 
+				target_direction):
+			[true, var target_cell]:
+				%Target.visible = true
+				%Target.position = tile_map.map_to_global(target_cell)
+
+			_:
+				%Target.visible = false
+	else:
+		if tile_map.has_pickupable_block(my_target):
+			%Target.visible = true
+			%Target.position = tile_map.map_to_global(my_target)
+		else:
+			%Target.visible = false
 
 
 func _tween_target():

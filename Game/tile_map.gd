@@ -15,6 +15,10 @@ func is_empty(cell: Vector2i) -> bool:
             && get_cell_source_id(2, cell) == -1
 
 
+func has_pickupable_block(cell: Vector2i) -> bool:
+    return get_cell_source_id(2, cell) != -1
+
+
 func map_to_global(cell: Vector2i) -> Vector2:
     return to_global(map_to_local(cell))
 
