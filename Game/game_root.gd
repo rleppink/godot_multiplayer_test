@@ -50,6 +50,7 @@ func _on_restart_button_pressed():
 
 	restart_game.rpc()
 
+
 @rpc("authority", "call_local")
 func restart_game() -> void:
 	get_tree().reload_current_scene()

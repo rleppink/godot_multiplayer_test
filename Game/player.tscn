@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://jortxuc7hkes" path="res://assets/player_sprites.tres" id="2_xmbx0"]
 [ext_resource type="Texture2D" uid="uid://dqoxeuwlcwbiy" path="res://assets/selection.png" id="3_2wou6"]
 [ext_resource type="Texture2D" uid="uid://42am3jiw8378" path="res://assets/sand_packed.png" id="4_y6v0r"]
-[ext_resource type="AudioStream" uid="uid://bhjlwm6mn5kjs" path="res://assets/throw.wav" id="5_hth1p"]
+[ext_resource type="AudioStream" uid="uid://bfftgs0l6575a" path="res://assets/throw_8bit.wav" id="5_kf6ql"]
 [ext_resource type="AudioStream" uid="uid://35no3kgdq63r" path="res://assets/hitHurt.wav" id="6_53l4f"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0mqwg"]
@@ -89,7 +89,7 @@ region_rect = Rect2(72, 72, 18, 18)
 
 [node name="ThrowSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("5_hth1p")
+stream = ExtResource("5_kf6ql")
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

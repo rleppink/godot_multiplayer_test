@@ -140,7 +140,7 @@ func _pickup_block(target: Vector2i):
 			18,
 			18)
 
-	tile_map.erase_cell(2, target)
+	tile_map.block_pickup(target)
 
 
 func _throw_block(target: Vector2i, target_direction: Vector2i):
@@ -155,7 +155,11 @@ func _throw_block(target: Vector2i, target_direction: Vector2i):
 			var source_id := carrying_block.source_id
 			var atlas_coords := carrying_block.atlas_coords
 			thrown_block.tween_finished = func(): 
-				tile_map.block_pickup(target_cell, source_id, atlas_coords)
+				tile_map.set_cell(
+ 						2,
+ 						target_cell,
+ 						source_id,
+ 						atlas_coords)
 
 			carrying_block = null
 			%ThrowSound.volume_db = randf_range(-7, 7)
